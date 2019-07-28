@@ -32,12 +32,14 @@ Centroids kmeans_plus_plus(Data data,
     Centroid first_centroid = data[static_cast<int>(floor(urand(data.size())))];
     Centroid latest_centroid = first_centroid;
     DistanceToNearestCentroid distance_to_nearest_centroid(data.size(), 0.0);
-    Centroids centroids(k);
-    for (int i = 0; i < k - 1; i++) {
+    Centroids centroids(k, latest_centroid);
+    for (int i = 1; i < k; i++) {
         for (int j = 0; j < data.size(); j++) {
             auto distance_between_latest_centroid_and_data_point = calculate_euclidean_distance(latest_centroid,
                                                                                                 data[j]);
-            if (distance_between_latest_centroid_and_data_point < distance_to_nearest_centroid[j]) {
+            if (i == 1) {
+                distance_to_nearest_centroid[j] = distance_between_latest_centroid_and_data_point;
+            } else if (distance_between_latest_centroid_and_data_point < distance_to_nearest_centroid[j]) {
                 distance_to_nearest_centroid[j] = distance_between_latest_centroid_and_data_point;
             }
         }

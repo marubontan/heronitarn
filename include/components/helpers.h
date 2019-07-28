@@ -1,8 +1,6 @@
-//
-// Created by Shuhei Kishi on 2019-07-27.
-//
+#include "components/data.h"
 
-#ifndef HERONITARN_HELPERS_H
-#define HERONITARN_HELPERS_H
+double urand(int ceil_number);
 
-#endif //HERONITARN_HELPERS_H
+double calculate_euclidean_distance(DataPoint data_point_1,
+                                    DataPoint data_point_2);
