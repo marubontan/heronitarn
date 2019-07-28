@@ -3,7 +3,7 @@ project(heronitarn)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_FILES main.cpp include/clustering/kmeans.hpp include/components/distances.h include/components/data.h)
+set(SOURCE_FILES main.cpp include/clustering/kmeans.hpp include/components/distances.h include/components/data.h include/clustering/initialization.h include/components/helpers.h)
 add_executable(${CMAKE_PROJECT_NAME}_run ${SOURCE_FILES})
 
 include_directories(src include)

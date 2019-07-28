@@ -7,7 +7,7 @@ set(SOURCE_FILES
         clustering/kmeans.cpp
         components/distances.cpp
         components/data.cpp
-        clustering/initialization.cpp)
+        clustering/initialization.cpp components/helpers.cpp)
 
 add_library(${CMAKE_PROJECT_NAME}_lib STATIC
         ${SOURCE_FILES}
