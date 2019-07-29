@@ -1,18 +1,6 @@
 #include "clustering/kmeans.hpp"
-#include <algorithm>
-#include <cmath>
-#include <random>
-#include <iostream>
+#include "components/helpers.h"
 
-double calculate_euclidean_distance(DataPoint data_point_1,
-                                    DataPoint data_point_2) {
-    int data_size = data_point_1.size();
-    double value_sum = 0.0;
-    for (auto i = 0; i < data_size; i++) {
-        value_sum += std::pow(data_point_1[i] - data_point_2[i], 2);
-    }
-    return std::sqrt(value_sum);
-}
 
 DataBelonging get_group_belonging(Data data,
                                   Centroids centroids,
@@ -76,13 +64,8 @@ Centroids get_new_centroids(Data data,
     return centroids;
 }
 
-double urand(int ceil_number) {
-    std::mt19937 mt{std::random_device{}()};
-    std::uniform_real_distribution<> dist(0.0, static_cast<double>(ceil_number));
-    return dist(mt);
-}
 
-DataBelonging get_random_belonging(Data data, K k) {
+DataBelonging get_random_belonging(const Data& data, K k) {
     int data_size = data.size();
     DataBelonging data_belonging(data_size, 0);
     for (auto &d : data_belonging) {
@@ -91,9 +74,9 @@ DataBelonging get_random_belonging(Data data, K k) {
     return data_belonging;
 }
 
-bool is_convergence_example(const Data data,
+bool is_convergence_example(const Data& data,
                             K k,
-                            const CentroidsHistory centroid_history,
+                            const CentroidsHistory& centroid_history,
                             DataBelongingHistory data_belonging_history) {
     auto data_belonging_history_size = data_belonging_history.size();
     if (data_belonging_history_size < 2) {
@@ -104,7 +87,7 @@ bool is_convergence_example(const Data data,
 
 }
 
-Centroids initialize_centroids_example(Data data, int k) {
+Centroids initialize_centroids_example(const Data& data, int k) {
     auto data_belonging = get_random_belonging(data, k);
     auto centroids = get_new_centroids(data, data_belonging, k);
 
