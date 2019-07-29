@@ -1,9 +1,5 @@
 #include "clustering/kmeans.hpp"
 #include "components/helpers.h"
-#include <algorithm>
-#include <cmath>
-#include <random>
-#include <iostream>
 
 
 DataBelonging get_group_belonging(Data data,
@@ -69,7 +65,7 @@ Centroids get_new_centroids(Data data,
 }
 
 
-DataBelonging get_random_belonging(Data data, K k) {
+DataBelonging get_random_belonging(const Data& data, K k) {
     int data_size = data.size();
     DataBelonging data_belonging(data_size, 0);
     for (auto &d : data_belonging) {
@@ -78,9 +74,9 @@ DataBelonging get_random_belonging(Data data, K k) {
     return data_belonging;
 }
 
-bool is_convergence_example(const Data data,
+bool is_convergence_example(const Data& data,
                             K k,
-                            const CentroidsHistory centroid_history,
+                            const CentroidsHistory& centroid_history,
                             DataBelongingHistory data_belonging_history) {
     auto data_belonging_history_size = data_belonging_history.size();
     if (data_belonging_history_size < 2) {
@@ -91,7 +87,7 @@ bool is_convergence_example(const Data data,
 
 }
 
-Centroids initialize_centroids_example(Data data, int k) {
+Centroids initialize_centroids_example(const Data& data, int k) {
     auto data_belonging = get_random_belonging(data, k);
     auto centroids = get_new_centroids(data, data_belonging, k);
 
